@@ -6,15 +6,30 @@ from app import create_app, db
 # Create the Flask app using the app factory
 app = create_app()
 
-from app.models import Category
 
 with app.app_context():
     db.create_all()
 
-    if Category.query.count() == 0:
-        from app.utils.seed_categories import seed_categories
+    from app.models import Category
 
-        seed_categories()
+    if Category.query.count() == 0:
+        default_categories = [
+            "Backend Development",
+            "Frontend Development",
+            "UI/UX Design",
+            "Database",
+            "DevOps",
+            "Cybersecurity",
+            "Artificial Intelligence",
+            "Other",
+            "Marketing",
+            "Finance",
+            "Writing",
+            "Data",
+        ]
+        for name in default_categories:
+            db.session.add(Category(name=name))
+        db.session.commit()
 
 
 # Run the application in development mode

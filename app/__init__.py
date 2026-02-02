@@ -1,11 +1,11 @@
 from flask import Flask
-from config import Config
+from app.config import Config
 from app.extensions import db, bcrypt, login_manager, csrf
 
 
 def create_app():
     app = Flask(__name__, template_folder="templates")
-    app.config.from_object(Config)
+    app.config.from_object("app.config.DevelopmentConfig")
 
     db.init_app(app)
     bcrypt.init_app(app)
