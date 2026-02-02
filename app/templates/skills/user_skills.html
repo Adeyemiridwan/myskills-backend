@@ -1,0 +1,18 @@
+<h2>{{ user.username }}'s Skills</h2>
+
+{% if skills %}
+  <ul>
+    {% for skill in skills %}
+      <li>
+        {{ skill.title }} — {{ skill.category.name }}
+
+        {% if current_user.id == user.id %}
+          <a href="{{ url_for('skills.edit_skill', skill_id=skill.id) }}">Edit</a>
+          <a href="{{ url_for('skills.delete_skill', skill_id=skill.id) }}">Delete</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No skills added yet.</p>
+{% endif %}

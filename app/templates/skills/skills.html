@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}My Skills{% endblock %}
+
+{% block content %}
+<div class="card">
+
+  <h2>My Skills</h2>
+  <p>All skills you’ve added so far</p>
+
+  <div class="skills-grid">
+    {% for skill in skills %}
+      <div class="skill-card">
+
+        <div class="skill-header">
+          <div class="skill-title">{{ skill.title }}</div>
+          <span class="badge">{{ skill.category.name }}</span>
+        </div>
+
+        <div class="skill-level">
+          Level: {{ skill.level }}
+        </div>
+
+        {% if skill.description %}
+          <div class="skill-desc">
+            {{ skill.description }}
+          </div>
+        {% endif %}
+
+        <div class="skill-actions">
+          <a class="btn-edit"
+             href="{{ url_for('skills.edit_skill', skill_id=skill.id) }}">
+            Edit
+          </a>
+
+          <form method="POST"
+                action="{{ url_for('skills.delete_skill', skill_id=skill.id) }}">
+            <button class="btn-delete" type="submit">
+              Delete
+            </button>
+          </form>
+        </div>
+
+      </div>
+    {% else %}
+      <p>No skills added yet.</p>
+    {% endfor %}
+  </div>
+
+  <br>
+  <a href="{{ url_for('skills.add_skill') }}">Add New Skill</a><br><br>
+  <a href="{{ url_for('profile.dashboard') }}">Back to Dashboard</a>
+
+</div>
+{% endblock %}

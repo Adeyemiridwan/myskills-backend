@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+
+    <!-- HEADER -->
+    <header style="margin-bottom: 25px;">
+        <h2>Dashboard</h2>
+        <p>Welcome back, {{ user.username }}</p>
+    </header>
+
+    <!-- STATS -->
+    <section style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px;">
+        <div class="card" style="padding:15px;">
+            <small>Total Skills</small>
+            <h2>{{ total_skills }}</h2>
+        </div>
+
+        <div class="card" style="padding:15px;">
+            <small>Status</small>
+            <h2 style="color:#22c55e;">{{ user.status|capitalize }}</h2>
+        </div>
+    </section>
+
+    <!-- PROFILE SUMMARY -->
+    <section style="margin-bottom: 25px;">
+        <h3>Profile Summary</h3>
+        <ul style="font-size:14px; color:#cbd5f5;">
+            <li><strong>Username:</strong> {{ user.username }}</li>
+            <li><strong>Email:</strong> {{ user.email }}</li>
+            <li><strong>Joined:</strong> {{ user.created_at.strftime('%b %d, %Y') }}</li>
+        </ul>
+
+    </section>
+
+    <hr style="border-color:#1e293b; margin:25px 0;">
+
+    <!-- SKILLS -->
+    <section style="margin-bottom: 25px;">
+        <h3>My Skills</h3>
+
+        {% if user.skills %}
+            <ul>
+                {% for skill in user.skills %}
+                    <li style="margin-bottom:10px;">
+                        <strong>{{ skill.title }}</strong>
+                        <span style="color:#9ca3af;">({{ skill.level }})</span><br>
+                        <small>{{ skill.category.name }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No skills added yet.</p>
+        {% endif %}
+
+        <a href="{{ url_for('skills.skills') }}">View All Skills →</a>
+    </section>
+
+    <hr style="border-color:#1e293b; margin:25px 0;">
+
+    <!-- ACTIVITY -->
+    <section>
+        <h3>Recent Activity</h3>
+
+        {% if activities %}
+            <ul class="activity-list">
+                {% for activity in activities [:5] %}
+                    <li style="font-size:13px; margin-bottom:8px;">
+                        {{ activity.action }}<br>
+                        <small style="color:#9ca3af;">
+                            {{ activity.timestamp.strftime('%b %d, %Y %H:%M') }}
+                        </small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No activity yet.</p>
+        {% endif %}
+
+        <a href="{{ url_for('profile.activities') }}">View Activity Log →</a>
+    </section>
+
+    <hr style="border-color:#1e293b; margin:25px 0;">
+
+    <!-- FOOTER ACTIONS -->
+    <footer>
+        <a href="{{ url_for('profile.update_profile') }}">Update Profile →</a><br><br>
+        <a href="{{ url_for('profile.change_password') }}">Change Password</a><br><br>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </footer>
+
+</div>
+
+{% endblock %}

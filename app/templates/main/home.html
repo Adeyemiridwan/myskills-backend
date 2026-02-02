@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<style>
+  .hero {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #1e1e2f, #2b2b45);
+    color: #fff;
+    text-align: center;
+}
+
+.hero h1 span {
+    color: #4da3ff;
+}
+
+.hero-buttons {
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: 600;
+}
+
+.btn.primary {
+    background: #4da3ff;
+    color: white;
+}
+
+.btn.secondary {
+    border: 1px solid #4da3ff;
+    color: #4da3ff;
+}
+
+.features, .how-it-works, .cta {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.feature-card {
+    padding: 25px;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.steps {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.step span {
+    display: inline-block;
+    background: #4da3ff;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    line-height: 35px;
+    margin-bottom: 10px;
+}
+
+
+/* ==========================
+   RESPONSIVE FIXES
+   ========================== */
+
+@media (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .container,
+    .page-container,
+    .home-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    form {
+        width: 100%;
+    }
+}
+
+
+
+
+</style>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Showcase Your Skills.  
+            <span>Build Your Identity.</span>
+        </h1>
+        <p>
+            MySkills helps you organize, display, and grow your professional skills
+            in one clean and powerful profile.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="{{ url_for('auth.register') }}" class="btn primary">Get Started</a>
+            <a href="{{ url_for('auth.login') }}" class="btn secondary">Login</a>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features">
+    <h2>What You Can Do</h2>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>📌 Add Skills</h3>
+            <p>Create and manage your skills with categories and descriptions.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🛠 Edit & Update</h3>
+            <p>Keep your profile updated as you grow and learn more.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🔐 Secure Account</h3>
+            <p>Your profile and data are protected with authentication.</p>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works">
+    <h2>How It Works</h2>
+
+    <div class="steps">
+        <div class="step">
+            <span>1</span>
+            <p>Create an account</p>
+        </div>
+
+        <div class="step">
+            <span>2</span>
+            <p>Add your skills</p>
+        </div>
+
+        <div class="step">
+            <span>3</span>
+            <p>Manage and grow</p>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta">
+    <h2>Start Building Your Skill Profile Today</h2><br>
+    <a href="{{ url_for('auth.register') }}" class="btn primary">Create Account</a>
+</section>
+
+{% endblock %}

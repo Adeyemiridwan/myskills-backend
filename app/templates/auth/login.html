@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+  <h1>Welcome Back</h1>
+  <p>Login to continue managing your skills</p>
+
+  <form method="POST">
+      {{ form.hidden_tag() }}
+
+      <label>{{ form.identifier.label }}</label>
+      {{ form.identifier() }}
+
+     
+      <div class="password-group">
+      {{ form.password.label }}
+      {{ form.password }}
+      <i class="fa-solid fa-eye password-toggle"></i>
+    </div>
+      {% for error in form.password.errors %}
+        <small style="color: red;">{{ error }}</small>
+      {% endfor %}
+
+      {{ form.submit() }}
+  </form>
+
+  <p style="margin-top:15px;">
+    Don’t have an account?
+    <a href="{{ url_for('auth.register') }}">Create one</a>
+  </p>
+
+</div>
+{% endblock %}

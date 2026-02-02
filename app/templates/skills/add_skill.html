@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Add Skill{% endblock %}
+
+{% block content %}
+<div class="card">
+
+  <h2>Add New Skill</h2>
+  <p>Show what you’re good at</p>
+
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <label>{{ form.title.label }}</label>
+    {{ form.title() }}
+
+    <label>{{ form.level.label }}</label>
+    {{ form.level() }}
+
+    <label>{{ form.description.label }}</label>
+    {{ form.description(rows=4) }}
+
+    <label>{{ form.category_id.label }}</label>
+    {{ form.category_id() }}
+
+    <button type="submit">Add Skill</button>
+  </form>
+
+  <br>
+  <a href="{{ url_for('profile.dashboard') }}">Back to Dashboard</a>
+
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Activity Log{% endblock %}
+
+{% block content %}
+<div class="card">
+
+  <h2>Activity Log</h2>
+  <p>Everything you’ve done in this account</p>
+
+  <div class="activity-list">
+    {% for activity in activities %}
+      <div class="activity-item">
+        <div class="activity-action">
+          {{ activity.action }}
+        </div>
+        <div class="activity-time">
+          {{ activity.timestamp.strftime('%b %d, %Y · %I:%M %p') }}
+        </div>
+      </div>
+    {% else %}
+      <p>No activity recorded yet.</p>
+    {% endfor %}
+  </div>
+
+  <br>
+  <a href="{{ url_for('profile.dashboard') }}">Back to Dashboard</a>
+
+</div>
+{% endblock %}
