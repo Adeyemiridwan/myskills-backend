@@ -108,7 +108,7 @@ class SkillForm(FlaskForm):
 
 
 # ==========================
-# Skill Form
+# Delete Form
 # ==========================
 class DeleteForm(FlaskForm):
     pass
