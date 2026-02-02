@@ -17,7 +17,8 @@ skills_bp = Blueprint("skills", __name__, url_prefix="/skills")
 @login_required
 def skills():
     skills = Skill.query.filter_by(user_id=current_user.id).all()
-    return render_template("skills/skills.html", skills=skills)
+    delete_form = DeleteForm()
+    return render_template("skills/skills.html", skills=skills, delete_form=delete_form)
 
 
 @skills_bp.route("/add-skill", methods=["GET", "POST"])
@@ -70,16 +71,6 @@ def add_skill():
         return redirect(url_for("profile.dashboard"))
 
     return render_template("skills/add_skill.html", form=form)
-
-
-@skills_bp.route("/users/<username>/skills")
-@login_required
-def user_skills(username):
-    user = User.query.filter_by(username=username).first_or_404()
-
-    skills = Skill.query.filter_by(user_id=user.id).all()
-
-    return render_template("skills/user_skills.html", user=user, skills=skills)
 
 
 @skills_bp.route("/skills/<int:skill_id>/edit", methods=["GET", "POST"])

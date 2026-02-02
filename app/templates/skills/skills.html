@@ -34,10 +34,14 @@
 
           <form method="POST"
                 action="{{ url_for('skills.delete_skill', skill_id=skill.id) }}">
+  
+            {{ delete_form.hidden_tag() }}
+
             <button class="btn-delete" type="submit">
               Delete
             </button>
           </form>
+
         </div>
 
       </div>
