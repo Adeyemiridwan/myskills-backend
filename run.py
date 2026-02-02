@@ -12,7 +12,7 @@ with app.app_context():
     db.create_all()
 
     if Category.query.count() == 0:
-        from app.utils.seed import seed_categories
+        from app.utils.seed_categories import seed_categories
 
         seed_categories()
 
