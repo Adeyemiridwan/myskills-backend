@@ -7,8 +7,21 @@
         {{ skill.title }} — {{ skill.category.name }}
 
         {% if current_user.id == user.id %}
+
           <a href="{{ url_for('skills.edit_skill', skill_id=skill.id) }}">Edit</a>
-          <a href="{{ url_for('skills.delete_skill', skill_id=skill.id) }}">Delete</a>
+
+          <form method="POST"
+                action="{{ url_for('skills.delete_skill', skill_id=skill.id) }}"
+                style="display:inline;">
+
+            {{ csrf_token() }}
+
+            <button type="submit"
+                    style="background:none; border:none; color:red; cursor:pointer;">
+              Delete
+            </button>
+          </form>
+
         {% endif %}
       </li>
     {% endfor %}

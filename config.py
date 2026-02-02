@@ -3,7 +3,7 @@ import os
 
 class Config:
     # Base directory
-    BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+    BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
     # Security
     SECRET_KEY = os.environ.get("SECRET_KEY") or "dev-secret-key-change-later"

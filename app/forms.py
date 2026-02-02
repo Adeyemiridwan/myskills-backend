@@ -105,3 +105,10 @@ class SkillForm(FlaskForm):
     category_id = SelectField("Category", coerce=int, validators=[DataRequired()])
 
     submit = SubmitField("Add Skill")
+
+
+# ==========================
+# Skill Form
+# ==========================
+class DeleteForm(FlaskForm):
+    pass

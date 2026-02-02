@@ -1,9 +1,8 @@
-from unicodedata import category
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, abort
 from flask_login import login_required, current_user
 from app.extensions import db
 from app.models import Skill, Category, User
-from app.forms import SkillForm
+from app.forms import SkillForm, DeleteForm
 from app.utils.activity import add_activity
 
 
@@ -123,6 +122,11 @@ def edit_skill(skill_id):
 @skills_bp.route("/skills/<int:skill_id>/delete", methods=["POST"])
 @login_required
 def delete_skill(skill_id):
+    form = DeleteForm()
+
+    if not form.validate_on_submit():
+        abort(400)
+
     skill = Skill.query.get_or_404(skill_id)
 
     if skill.user_id != current_user.id:
@@ -130,8 +134,8 @@ def delete_skill(skill_id):
         return redirect(url_for("profile.dashboard"))
 
     db.session.delete(skill)
-
     db.session.commit()
+
     add_activity(action=f"Deleted skill: {skill.title}")
     flash("Skill deleted", "success")
     return redirect(url_for("profile.dashboard"))
